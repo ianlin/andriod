@@ -1,0 +1,27 @@
+
+int E1 = 6;
+int M1 = 7;
+int E2 = 5;
+int M2 = 4;
+void setup(void)
+{
+  Serial.begin(9600);
+  Serial.println("Stepper test!");
+  pinMode(M1, OUTPUT);
+  pinMode(M2, OUTPUT);
+  pinMode(E1, OUTPUT);
+  pinMode(E2, OUTPUT);
+}
+void loop(void)
+{
+  while (Serial.available() < 1) {} // Wait until a character is received
+  char val = Serial.read(); 
+  Serial.println("test!");
+  digitalWrite(M1, HIGH);
+  digitalWrite(M2, HIGH);
+  analogWrite(E1, 190);   //PWM Speed Control
+  analogWrite(E2, 190);   //PWM Speed Control
+  Serial.println("should execute moto");
+
+delay(50); 
+}
