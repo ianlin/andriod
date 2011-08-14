@@ -17,40 +17,62 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 *  taosheng.chen[at]gmail.com
 */
 public class TalentManager{
+    private String RESOURCE = "mybatisConfig.xml"; 
+    private SqlSession SQL_SESSION ;
     /** An empty Talent instance*/
-    public TalentManager(){
+    public TalentManager()throws Exception{
+        Reader reader = Resources.getResourceAsReader(RESOURCE); 
+        this.SQL_SESSION = new SqlSessionFactoryBuilder().build(reader).openSession();
+
+        this.SQL_SESSION.getConnection().setAutoCommit(true);
         
     }
     /** A given id to manage a talent */
     public TalentManager(String id){
     }
     /** Add new talent in datbase*/
-    public void addTalent(Object o){
-   
+    public void addTalent(Talent talent){
+        TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
+        talentMapper.insert(talent);
     } 
+    public void deleteTalentById(String id){
+        TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
+        talentMapper.deleteByPrimaryKey(id);
+    }
+    public List<Talent> selectTalentByEmail(String email){
+
+        TalentExample talentExample = new TalentExample();
+        TalentExample.Criteria criteria = talentExample.createCriteria();
+        criteria.andEmailLike(email);
+        TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
+        List<Talent> talentList = talentMapper.selectByExample(talentExample);
+        return talentList ;
+     
+    }
 
     public static void main(String arg[])throws Exception{
         println("demo the Talent class");
         TalentManager tm = new TalentManager();
-        tm.addTalent("newtel");
 
-        String resource = "mybatisConfig.xml"; 
-        Reader reader = Resources.getResourceAsReader(resource); 
-        SqlSession sqlSession = new SqlSessionFactoryBuilder().build(reader).openSession();
-
-        sqlSession.getConnection().setAutoCommit(true);
-        
-        TalentMapper talentMapper = sqlSession.getMapper(TalentMapper.class);
         Talent t = new Talent();
-        t.setId("0000001");
-        t.setName("radZebra");
+        t.setId("0000002");
+        t.setName("radZebra-2");
         t.setCellPhone("02-3939889");
         t.setEmail("radZebra@gmail.com") ;
         t.setBirthYear("2011");
         t.setDesc("a default user of talent manager");
 
-        talentMapper.insert(t);
-        sqlSession.close();
+        tm.addTalent(t);
+	println("talent added...");
+        List<Talent> listTalent = tm.selectTalentByEmail("%radZebra%");
+        for (Talent oneTalent : listTalent) {
+            println("talent:"+oneTalent);
+        }
+	println("talent selected...via email:radZebra");
+       
+        tm.deleteTalentById("0000002") ;
+	println("talent deleted...");
+
     }
 
 
