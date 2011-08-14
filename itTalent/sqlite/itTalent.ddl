@@ -12,6 +12,30 @@ CREATE TABLE talent(
     desc TEXT
 );
 
+INSERT INTO talent values("1","radzebra","","","","redZebra@gmail.com",2011,"","master","first user for all");
+
+CREATE TABLE tag(
+    ID char(50) primary key,
+    desc TEXT not null
+);
+
+INSERT INTO tag values("P0001","java");
+INSERT INTO tag values("P0002","python");
+INSERT INTO tag values("P0003","perl");
+INSERT INTO tag values("A0001","Grid computing");
+INSERT INTO tag values("A0002","Cloud computing");
+
+CREATE TABLE talent_tag(
+    talent_ID char(50),
+    tag_ID char(50),
+    FOREIGN KEY(talent_ID) REFERENCES talent(ID),
+    FOREIGN KEY(tag_ID) REFERENCES tag(ID)
+);
+
+INSERT INTO talent_tag values("1","P0001");
+INSERT INTO talent_tag values("1","P0002");
+INSERT INTO talent_tag values("1","A0002");
+
 CREATE TABLE contact(
     talent_ID char(50),
     method char(100),

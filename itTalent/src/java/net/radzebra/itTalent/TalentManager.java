@@ -39,6 +39,13 @@ public class TalentManager{
         TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
         talentMapper.deleteByPrimaryKey(id);
     }
+
+    public List<Talent> selectTalentByTagDesc(String desc){
+        TalentExample talentExample = new TalentExample();
+        TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
+        List<Talent> talentList = talentMapper.selectByTagDesc(desc);
+        return talentList ;
+    }
     public List<Talent> selectTalentByEmail(String email){
 
         TalentExample talentExample = new TalentExample();
@@ -55,7 +62,7 @@ public class TalentManager{
         TalentManager tm = new TalentManager();
 
         Talent t = new Talent();
-        t.setId("0000002");
+        t.setId("000000X1");
         t.setName("radZebra-2");
         t.setCellPhone("02-3939889");
         t.setEmail("radZebra@gmail.com") ;
@@ -65,12 +72,17 @@ public class TalentManager{
         tm.addTalent(t);
 	println("talent added...");
         List<Talent> listTalent = tm.selectTalentByEmail("%radZebra%");
+	println("select talent...by email:radZebra");
         for (Talent oneTalent : listTalent) {
             println("talent:"+oneTalent);
         }
-	println("talent selected...via email:radZebra");
+        println("select talent by tag.desc=java");
+        listTalent = tm.selectTalentByTagDesc("java");
+        for (Talent oneTalent : listTalent) {
+            println("talent:"+oneTalent);
+        }
        
-        tm.deleteTalentById("0000002") ;
+        tm.deleteTalentById("000000X1") ;
 	println("talent deleted...");
 
     }

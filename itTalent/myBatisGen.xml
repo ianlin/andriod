@@ -32,6 +32,8 @@
     <table tableName="endorsement" schema="endorsement" />
     <table tableName="confident_level" schema="confident_level" />
     <table tableName="type" schema="type" />
+    <table tableName="tag" schema="tag" />
+    <table tableName="talent_tag" schema="talent_tag" />
 
   </context>
 </generatorConfiguration>
