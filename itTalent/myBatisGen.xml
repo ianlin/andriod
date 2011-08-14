@@ -19,7 +19,7 @@
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="test.xml"  targetProject="src/sqlmap/">
+    <sqlMapGenerator targetPackage="net.radzebra.itTalent.sqlmap"  targetProject="src/sqlmap/">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
