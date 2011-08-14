@@ -5,7 +5,6 @@
 
 <generatorConfiguration>
   <classPathEntry location="thirdParty/sqlitejdbc-v056.jar" />
-
   <context id="sqliteTables" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="org.sqlite.JDBC"
         connectionURL="jdbc:sqlite:sqlite/itTalent.db" >
@@ -20,21 +19,19 @@
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="test.xml"  targetProject="\MBGTestProject\src">
+    <sqlMapGenerator targetPackage="test.xml"  targetProject="src/sqlmap/">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"  targetProject="\MBGTestProject\src">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="net.radzebra.itTalent.dao"  targetProject="src/java">
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
-
-    <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
-      <property name="useActualColumnNames" value="true"/>
-      <generatedKey column="ID" sqlStatement="DB2" identity="true" />
-      <columnOverride column="DATE_FIELD" property="startDate" />
-      <ignoreColumn column="FRED" />
-      <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
-    </table>
+    <table tableName="talent" schema="talent"/>
+    <table tableName="contact" schema="contact" />
+    <table tableName="talent_story" schema="talent_story" />
+    <table tableName="endorsement" schema="endorsement" />
+    <table tableName="confident_level" schema="confident_level" />
+    <table tableName="type" schema="type" />
 
   </context>
 </generatorConfiguration>

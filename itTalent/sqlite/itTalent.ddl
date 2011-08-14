@@ -4,8 +4,8 @@ CREATE TABLE talent(
     name TEXT not null,
     first_name char(50),
     last_name  char(50),
-    cell_phone TEXT,
-    email TEXT,
+    cell_phone char(200),
+    email char(200) not null,
     birth_year INTEGER,
     birth_date TEXT,
     self_skill_desc TEXT,
@@ -14,6 +14,7 @@ CREATE TABLE talent(
 
 CREATE TABLE contact(
     talent_ID char(50),
+    method char(100),
     desc TEXT,
     FOREIGN KEY(talent_ID) REFERENCES talent(ID)
 );
@@ -43,6 +44,8 @@ CREATE TABLE endorsement(
 
 CREATE TABLE confident_level(
     ID char(10) primary key,
+    endorser_ID char(50),
+    level integer,
     desc TEXT
 );
 
