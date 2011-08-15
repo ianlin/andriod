@@ -4,6 +4,7 @@
   <!-- set global properties for this build -->
   <property name="src" location="src/java"/>
   <property name="build" location="build"/>
+  <property name="jdk" location="build"/>
   <property name="dist"  location="dist"/>
   <property name="thirdParty"  location="thirdParty"/>
 

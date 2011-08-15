@@ -11,9 +11,10 @@ also in traditional web.
 Tao-Sheng (taosheng.chen@gmail.com)
 
 
-== design ==
+== Design ==
 
+Leverage mybatis and the generator tool for reduce the work on data access.
 
-== database ==
+== UI ==
 
 
