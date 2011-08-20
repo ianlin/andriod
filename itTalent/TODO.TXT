@@ -1,0 +1,5 @@
+
+* very simple web UI for 
+	(1) talent add, list, search
+	(2) talent history add, list, search
+	(3) talent tag add, list, search
