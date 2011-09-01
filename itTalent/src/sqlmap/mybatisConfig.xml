@@ -18,6 +18,11 @@
 <mapper resource="net/radzebra/itTalent/sqlmap/ContactMapper.xml" />
 <mapper resource="net/radzebra/itTalent/sqlmap/TalentMapper.xml" />
 <mapper resource="net/radzebra/itTalent/sqlmap/TypeMapper.xml" />
+<mapper resource="net/radzebra/itTalent/sqlmap/TalentTagMapper.xml" />
+<mapper resource="net/radzebra/itTalent/sqlmap/TagMapper.xml" />
+
+
+
  </mappers>
 
 </configuration>

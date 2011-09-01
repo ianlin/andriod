@@ -61,20 +61,24 @@ public class TalentManager{
         println("demo the Talent class");
         TalentManager tm = new TalentManager();
 
+        println("create tm ");
         Talent t = new Talent();
-        t.setId("000000X1");
+	println("talent newed...");
         t.setName("radZebra-2");
         t.setCellPhone("02-3939889");
-        t.setEmail("radZebra@gmail.com") ;
+        t.setEmail("toBeDel@gmail.com") ;
         t.setBirthYear("2011");
         t.setDesc("a default user of talent manager");
 
         tm.addTalent(t);
 	println("talent added...");
-        List<Talent> listTalent = tm.selectTalentByEmail("%radZebra%");
-	println("select talent...by email:radZebra");
+        List<Talent> listTalent = tm.selectTalentByEmail("%toBeDel%");
+	println("select talent...by email:toBeDel");
         for (Talent oneTalent : listTalent) {
             println("talent:"+oneTalent);
+            println("delete this talent...");
+            tm.deleteTalentById(oneTalent.getId() );
+   
         }
         println("select talent by tag.desc=java");
         listTalent = tm.selectTalentByTagDesc("java");
@@ -82,8 +86,6 @@ public class TalentManager{
             println("talent:"+oneTalent);
         }
        
-        tm.deleteTalentById("000000X1") ;
-	println("talent deleted...");
 
     }
 

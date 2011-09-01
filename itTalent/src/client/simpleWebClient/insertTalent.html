@@ -9,19 +9,28 @@
 			$(function(){
 
 				$( "input:submit, button").button();
-			//	$( "a", ".demo" ).click(function() { return false; });
 				$('input[name|="insertStory"]').click(
 					function() {
-						var tmpStory;
-						tmpStory = $('select[name|="storyType"]').val()+ ":" ;
+						var tmpStory='<div id="tmpAddStory" class="currentStoryClass"> <input type="radio" id="removeThisDiv" name="storyRadio" />';
+						tmpStory += $('select[name|="storyType"]').val()+ ":" ;
 						tmpStory += $('input[name|="storyStartDate"]').val()+":" ;
 						tmpStory += $('input[name|="storyEndDate"]').val()+":" ;
 						tmpStory += $('textarea[name|="storyDesc"]').val()+":" ;
-						alert(tmpStory) ;
+ 						tmpStory += "</div>";
 						$('#currentStory').append(tmpStory);
+                                                $("input:radio").radio();
+						
+//                                                $('#removeThisDiv').click(function() { alert("called in which div?") ; alert(this);  } );
+					
 						
 					}
 				);
+				$('input[name|="removeStory"]').click(
+					function(){
+						$('input[name=storyRadio]:checked').parent().remove();
+					}
+				);
+				// $( "button", ".currentStoryClass" ).click(function() { alert(this) ; });
 
 				// Accordion
 				$("#accordion").accordion({ header: "h3" });
@@ -144,9 +153,13 @@
 					<tr><td align="right">Description:</td><td align="left"><textarea name="storyDesc" cols="50" rows="5" ></textarea></td></tr>
 					<tr><td align="right"></td><td align="left"></td></tr>
 				</table>
+
 				<input type="button" name="insertStory" value="add a story" />
-				<div id="currentStory" >
+
+				<div id="currentStory">
 				</div>
+				<input type="button" name="removeStory" value="remove selected story" />
+           
 			</div>
 
 			<div id="tabs-3">

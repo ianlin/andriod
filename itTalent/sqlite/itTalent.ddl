@@ -1,6 +1,6 @@
 
 CREATE TABLE talent(
-    ID char(50) primary key,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT not null,
     first_name char(50),
     last_name  char(50),
@@ -12,53 +12,50 @@ CREATE TABLE talent(
     desc TEXT
 );
 
-INSERT INTO talent values("1","radzebra","","","","redZebra@gmail.com",2011,"","master","first user for all");
+INSERT INTO talent values(1,"radzebra","","","","redZebra@gmail.com",2011,"","master","first user for all");
 
 CREATE TABLE tag(
-    ID char(50) primary key,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     desc TEXT not null
 );
 
-INSERT INTO tag values("P0001","java");
-INSERT INTO tag values("P0002","python");
-INSERT INTO tag values("P0003","perl");
-INSERT INTO tag values("A0001","Grid computing");
-INSERT INTO tag values("A0002","Cloud computing");
+INSERT INTO tag values(1,"java");
+INSERT INTO tag values(2,"python");
+INSERT INTO tag values(3,"perl");
+INSERT INTO tag values(4,"Grid computing");
+INSERT INTO tag values(5,"Cloud computing");
 
 CREATE TABLE talent_tag(
-    talent_ID char(50),
-    tag_ID char(50),
+    talent_ID INTEGER ,
+    tag_ID INTEGER ,
     FOREIGN KEY(talent_ID) REFERENCES talent(ID),
     FOREIGN KEY(tag_ID) REFERENCES tag(ID)
+    PRIMARY KEY(talent_ID, tag_ID)
 );
 
-INSERT INTO talent_tag values("1","P0001");
-INSERT INTO talent_tag values("1","P0002");
-INSERT INTO talent_tag values("1","A0002");
 
 CREATE TABLE contact(
-    talent_ID char(50),
+    talent_ID INTEGER PRIMARY KEY AUTOINCREMENT,
     method char(100),
     desc TEXT,
     FOREIGN KEY(talent_ID) REFERENCES talent(ID)
 );
 
 CREATE TABLE talent_story(
-    talent_ID char(50),
-    story_ID char(50),
+    talent_ID INTEGER,
+    story_ID INTEGER PRIMARY KEY AUTOINCREMENT,
     confident_level_ID char(10),
     type_ID char(10), 
     start_date char(20),
     end_date char(20),
     desc TEXT,
-    PRIMARY KEY(talent_ID, story_ID),
     FOREIGN KEY(talent_ID) REFERENCES talent(ID),
     FOREIGN KEY(type_ID) REFERENCES type(ID),
     FOREIGN KEY(confident_level_ID) REFERENCES confident_leve(ID)
 );
 
 CREATE TABLE endorsement(
-    ID char(50) primary key,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     talent_ID char(50),
     story_ID char(50),
     endorser_ID char(50),
@@ -67,14 +64,14 @@ CREATE TABLE endorsement(
 );
 
 CREATE TABLE confident_level(
-    ID char(10) primary key,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     endorser_ID char(50),
     level integer,
     desc TEXT
 );
 
 CREATE TABLE type(
-    ID char(10) primary key,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     desc TEXT
 );
 
