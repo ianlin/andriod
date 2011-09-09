@@ -57,6 +57,12 @@
          <classpath refid="run.classpath"> </classpath>
        </java>
   </target>
+  <target name="runTryGson" depends="dist" 
+        description="run some trying program">
+     <java classname="TryGson" >
+         <classpath refid="run.classpath"> </classpath>
+       </java>
+  </target>
 
   <target name="clean"
         description="clean up" >
@@ -65,7 +71,7 @@
     <delete dir="${dist}"/>
   </target>
 
-  <target name="war" depends="dist" description="build web server war file">
+  <target name="war" depends="clean,dist" description="build web server war file">
 
     <war destfile="${dist}/itTalent.war" webxml="src/web/server/web.xml">
       <fileset dir="sqlite/"/>
