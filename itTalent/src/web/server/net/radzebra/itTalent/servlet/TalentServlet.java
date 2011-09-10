@@ -39,11 +39,12 @@ public class TalentServlet extends HttpServlet{
       //      for (Talent oneTalent : listTalent) {
       //          outputBuffer.append("talent:"+oneTalent+" ");
       //      }
+            outputBuffer.append("{'response':'OK'}");
         }catch(Exception e){
-            throw new ServletException(e);
+            //throw new ServletException(e);
+            outputBuffer.append("{'exception':'"+e+"'}");
 	}
         
-        outputBuffer.append("{'response':'OK'}");
 	output.println(outputBuffer.toString() );
         output.close();
     }

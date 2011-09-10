@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>talent</servlet-name>
-        <url-pattern>/talent</url-pattern>
+        <url-pattern>/talent/*</url-pattern>
     </servlet-mapping>
     <!-- Default login configuration uses form-based authentication -->
     <security-role>
