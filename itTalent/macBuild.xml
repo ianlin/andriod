@@ -59,6 +59,13 @@
          <classpath refid="run.classpath"> </classpath>
        </java>
   </target>
+  <target name="runTransformer" depends="dist" 
+        description="run net.radzebra.itTalent.json.Transformer">
+     <java classname="net.radzebra.itTalent.json.Transformer" >
+         <classpath refid="run.classpath"> </classpath>
+       </java>
+  </target>
+  
 
   <target name="clean"
         description="clean up" >
