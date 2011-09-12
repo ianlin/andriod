@@ -23,6 +23,8 @@
   </path>
   <path id="run.classpath">
     <pathelement location="src/sqlmap"/>
+    <pathelement location="src/java"/>
+    <pathelement location="."/>
     <fileset dir="${dist}/">
       <include name="**/*.jar"/>
     </fileset>
@@ -59,6 +61,15 @@
          <classpath refid="run.classpath"> </classpath>
        </java>
   </target>
+
+  <target name="runTryGson" depends="dist" 
+        description="run some trying program">
+     <java classname="TryGson" >
+         <classpath refid="run.classpath"> </classpath>
+       </java>
+  </target>
+
+
   <target name="runTransformer" depends="dist" 
         description="run net.radzebra.itTalent.json.Transformer">
      <java classname="net.radzebra.itTalent.json.Transformer" >

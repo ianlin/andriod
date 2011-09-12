@@ -11,6 +11,24 @@ import com.google.gson.reflect.*;
 
 public class TalentServlet extends HttpServlet{
 
+    private void addObject(String className, BufferedReader requestContent)
+	throws IOException,Exception{
+            Gson gson = new Gson();
+            Map<String, Class> classMap = new HashMap<String, Class>(7); 
+            classMap.put("Talent",Talent.class);
+	    Object obj = gson.fromJson(requestContent, classMap.get("Talent"));
+	    TalentManager tManager = new TalentManager();
+            tManager.addObject(obj);
+    }
+    private void deleteObject(String className, BufferedReader requestContent)
+	throws IOException,Exception{
+            Gson gson = new Gson();
+	    Map<String, String> toDelMap = 
+		gson.fromJson(requestContent, new TypeToken<Map<String, String>>() {}.getType() );
+	    TalentManager tManager = new TalentManager();
+            tManager.deleteByPrimaryKey(className, toDelMap.get("primarykey"));
+    }
+
     public void doGet(HttpServletRequest req, HttpServletResponse res)
         throws ServletException,IOException{
 	res.setContentType("text/plain; charset=UTF-8");
@@ -22,24 +40,25 @@ public class TalentServlet extends HttpServlet{
 	BufferedReader  reader = req.getReader();
         // TODO a config to determind the actions
         String[] requestURIParts = requestURI.split("/");
-        String targetClass = requestURIParts[2];
-        String targetAction = requestURIParts[3] ;
-        String name="";
+        String api = requestURIParts[2];
+
+        if(!api.equals("api")){ return ; }
+
+        String targetClass = requestURIParts[3];
+        String targetAction = requestURIParts[4] ;
         try{
 
-//	    TalentManager tm = new TalentManager();
-	    
-            Gson gson = new Gson();
-	    Talent oneTalent = gson.fromJson(reader, Talent.class);
-	    TalentManager tManager = new TalentManager();
-            name = oneTalent.getName();
-            tManager.addTalent(oneTalent);
-
+            if( targetAction.equals("add") || targetAction.equals("insert")) {
+                addObject(targetClass,reader);
+            }else if(targetAction.equals("delete")){
+                deleteObject(targetClass,reader) ;
+            }else{
+                outputBuffer.append("{'response':'no support such action:"+targetAction+"'}");
+            }
       //      List<Talent> listTalent = tm.selectTalentByEmail("%rad%");
       //      for (Talent oneTalent : listTalent) {
       //          outputBuffer.append("talent:"+oneTalent+" ");
       //      }
-            outputBuffer.append("{'response':'OK'}");
         }catch(Exception e){
             //throw new ServletException(e);
             outputBuffer.append("{'exception':'"+e+"'}");

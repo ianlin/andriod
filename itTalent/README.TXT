@@ -23,9 +23,16 @@ Tao-Sheng (taosheng.chen@gmail.com)
 * mybatis and the generator tool for reduce the work on data access.
 * jquery and jquery-ui for simple web UI
 
-== GWT ==
-* consider to host in google 
-
+== Simple Web site ==
+* http request for select/add/remove/modify database
+* example:
+	- add talent
+		curl -X POST http://localhost:8080/itTalent/api/Talent/add --data "{'name':'rz','email':'somebody2@gmail.com','cellPhone':'23939889','birthYear':'2011','selfSkillDesc':'too many to mentain','desc':'simple description of my self','birthData':'1988-04-21','firstName':'Rad','lastName':'Zebra'}"
+	- select talent 
+		curl -X POST http://localhost:8080/itTalent/api/Talent/select --data "{'email':'gmail.com'}"
+	- remove talent 
+		curl -X POST http://localhost:8080/itTalent/api/Talent/delete --data "{'primarykey':'15'}"
 == Merge database ==
+
 
 

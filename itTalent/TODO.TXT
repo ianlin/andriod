@@ -6,3 +6,4 @@
 * Java Web Serlvet accepts JSON string for insert/select 
 	(1) use gson 
 	(2) a transformer to transfer between dao/json
+            The transformer should have a generic method to complete this 
