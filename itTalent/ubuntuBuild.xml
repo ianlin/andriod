@@ -94,7 +94,8 @@
     </war>
   </target>
 
-  <target name="gwtWar" depends="clean, dist" description="build google war, however, gae doesn't support file IO...it won't work in gae" >
+  <target name="gwtWar" depends="clean, dist" 
+	description="build google war, however, gae doesn't support file IO...it won't work in gae" >
     <mkdir dir="${ittalentrz}/war/WEB-INF/lib" />
     <mkdir dir="${ittalentrz}/war/WEB-INF/classes" />
     <copy

@@ -28,6 +28,23 @@ public class TalentServlet extends HttpServlet{
 	    TalentManager tManager = new TalentManager();
             tManager.deleteByPrimaryKey(className, toDelMap.get("primarykey"));
     }
+    private String selectObject(String className, BufferedReader requestContent)
+	throws IOException,Exception{
+            String result ="";
+            if(className.equals("talent.byEmail")){
+                Gson gson = new Gson();
+	        Map<String, String> toSelectMap = 
+		    gson.fromJson(requestContent, new TypeToken<Map<String, String>>() {}.getType() );
+	        TalentManager tManager = new TalentManager();
+                List<Talent> talentList = tManager.selectTalentByEmail(toSelectMap.get("email"));
+                result = "[";
+                for (Talent t : talentList){ 
+                    result = result +  gson.toJson(t) +",";
+                } 
+                result = result + "]";
+            }
+            return result;
+    }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
         throws ServletException,IOException{
@@ -52,6 +69,9 @@ public class TalentServlet extends HttpServlet{
                 addObject(targetClass,reader);
             }else if(targetAction.equals("delete")){
                 deleteObject(targetClass,reader) ;
+            }else if(targetAction.equals("select")){
+                String result = selectObject(targetClass,reader) ;
+                outputBuffer.append(result) ;
             }else{
                 outputBuffer.append("{'response':'no support such action:"+targetAction+"'}");
             }

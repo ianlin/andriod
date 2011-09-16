@@ -9,52 +9,20 @@
 			$(function(){
 
 				$( "input:submit, button").button();
-				$('input[name|="insertContact"]').click(
-					function() {
-						var tmpContact='<div id="tmpAddContact" class="currentContactClass"> <input type="radio" id="removeThisDiv" name="contactRadio" />';
-						tmpContact += $('select[name|="contactMethod"]').val() +":";
-						tmpContact += $('input[name|="contactDesc"]').val() +":";
-						tmpContact += "</div>" ;
-						$('#currentContact').append(tmpContact);
-                                                $("input:radio").radio();
-                                        }
-				);
+				$('#searchSubmit').click(function() {
+			            var url = "/itTalent/api/talent.byEmail/select";
+				    var byEmail = $('input[name|="byEmail"]').val() ;
+ 				    alert(byEmail);
+                                    $.ajax(
+                                         { data:"{'email':'%"+byEmail+"%'}", 
+                                           success: function(data){
+                                               alert(data);
+                                           }
+                                    });
 
-				$('input[name|="insertTag"]').click(
-					function() {
-						var tmpTag='<div id="tmpAddTag" class="currentTagClass"> <input type="radio" id="removeThisDiv" name="tagRadio" />';
-						tmpTag += $('input[name|="tag"]').val() ;
-						tmpTag += "</div>" ;
-						$('#currentTag').append(tmpTag);
-                                                $("input:radio").radio();
-                                        }
-				);
-				$('input[name|="insertStory"]').click(
-					function() {
-						var tmpStory='<div id="tmpAddStory" class="currentStoryClass"> <input type="radio" id="removeThisDiv" name="storyRadio" />';
-						tmpStory += $('select[name|="storyType"]').val()+ ":" ;
-						tmpStory += $('input[name|="storyStartDate"]').val()+":" ;
-						tmpStory += $('input[name|="storyEndDate"]').val()+":" ;
-						tmpStory += $('textarea[name|="storyDesc"]').val()+":" ;
- 						tmpStory += "</div>";
-						$('#currentStory').append(tmpStory);
-                                                $("input:radio").radio();
-						
-//                                                $('#removeThisDiv').click(function() { alert("called in which div?") ; alert(this);  } );
-					
-						
-					}
-				);
-				$('input[name|="removeContact"]').click(
-					function(){
-						$('input[name=contactRadio]:checked').parent().remove();
-					}
-				);
-				$('input[name|="removeStory"]').click(
-					function(){
-						$('input[name=storyRadio]:checked').parent().remove();
-					}
-				);
+            //prevent the browser to follow the link
+            			return false;
+        			});
 				$('input[name|="removeTag"]').click(
 					function(){
 						$('input[name=tagRadio]:checked').parent().remove();
@@ -131,12 +99,14 @@
 </div><!-- End demo-description -->
 
 		<!-- Accordion -->
-		<h3 class="demoHeaders">Insert Talent!</h3> 
-		<input type="submit" value="Insert!" /> <p>fill up following tags, and then click the "Insert" </p>
+		<h3 class="demoHeaders">Talent AP!</h3> 
+                 <div id="searchInfo" >
+		<input type="text" id="byEmail" name="byEmail" />:<input type="submit" value="search" id="searchSubmit" /> 
+                 </div>
 
 		<!-- ui-dialog -->
 		<div id="dialog" title="Dialog Title">
-			<p>Insert Done!</p>
+			<p>Search by email Done!</p>
 		</div>
 	
 		<!-- Tabs for One Talent Information  -->
