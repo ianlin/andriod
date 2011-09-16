@@ -6,6 +6,8 @@
   <property name="webSrc" location="src/web/server"/>
   <property name="build" location="build"/>
   <property name="jdk" location="build"/>
+  <property name="ittalentrz" location="/tmp/ittalentrz"/>
+  <property name="gwtsdk" location="/tmp/google_appengine"/>
   <property name="dist" location="dist"/>
   <property name="tomcat" location="/usr/share/tomcat6/"/>
   <property name="thirdParty"  location="thirdParty"/>
@@ -91,5 +93,51 @@
       </lib>
     </war>
   </target>
+
+  <target name="gwtWar" depends="clean, dist" description="build google war, however, gae doesn't support file IO...it won't work in gae" >
+    <mkdir dir="${ittalentrz}/war/WEB-INF/lib" />
+    <mkdir dir="${ittalentrz}/war/WEB-INF/classes" />
+    <copy
+        todir="${ittalentrz}/war/WEB-INF/lib"
+        flatten="true">
+      <fileset dir="${gwtsdk}/lib/user">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+    <copy
+        todir="${ittalentrz}/war/" >
+      <fileset dir="src/client/simpleWebClient/">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+    <copy
+        todir="${ittalentrz}/war/WEB-INF/classes"
+        flatten="true" >
+      <fileset dir="sqlite/">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+    <copy
+        todir="${ittalentrz}/war/WEB-INF/lib"
+        flatten="true" >
+      <fileset dir="${thirdParty}">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+
+    <copy
+        todir="${ittalentrz}/war/WEB-INF/classes" >
+      <fileset dir="src/sqlmap/">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+    <copy todir="${ittalentrz}/war/WEB-INF/lib" file="${dist}/lib/itTalent-${DSTAMP}.jar"/>
+    <copy todir="${ittalentrz}/war/WEB-INF/"  file="src/gwt/WEB-INF/appengine-web.xml" />
+    <copy todir="${ittalentrz}/war/WEB-INF/"  file="src/web/server/web.xml" />
+
+  </target>
+
+
+
 </project>
 
