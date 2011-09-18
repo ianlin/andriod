@@ -32,6 +32,7 @@ public class TalentServlet extends HttpServlet{
 	throws IOException,Exception{
             String result ="";
             if(className.equals("talent.byEmail")){
+                result = result + "[";
                 Gson gson = new Gson();
 	        Map<String, String> toSelectMap = 
 		    gson.fromJson(requestContent, new TypeToken<Map<String, String>>() {}.getType() );

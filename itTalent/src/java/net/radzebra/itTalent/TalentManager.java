@@ -58,7 +58,7 @@ public class TalentManager{
         return addObject(obj);
     }
     /** simple select Object by primarykey */
-    public Object selectObject(Object key, String className)throws Exception{
+    public Object selectObject(String className,Object key)throws Exception{
         String mapperSelectName = className+"Mapper.selectByPrimaryKey";
         return this.SQL_SESSION.selectOne(mapperSelectName,key);
     }
@@ -106,7 +106,7 @@ public class TalentManager{
         t.setDesc("a default user of talent manager");
 
 //        tm.addObject(t);
-        t = (Talent)tm.selectObject("11", Talent.class.getName() );
+        t = (Talent)tm.selectObject( Talent.class.getName() ,"11");
         println(t.getName() );
 
 /*

@@ -6,12 +6,26 @@
 		<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript">
+                function showTalentFunc(msg){
+                  // alert(msg)
+                   var jsondata=eval("["+msg+"]");
+   		   $('input[name|="talent.name"]').val(jsondata[0]['name']);
+
+   		}
    		function getTalentById(id){
-			alert(id);
-			$('input[name|="talentName"]').val(id);
+		    var targetUrl = "/itTalent/api/talent.byPrimarykey/select";
+    		    $.ajax({
+   			type: "POST",
+   			url: targetUrl,
+ 			data:"{'primarykey':'"+id+"'}", 
+   			success: showTalentFunc
+		    },"json");
 		}
                 function showListFunc(msg){
-                     var jsondata=eval(msg);
+
+                    var jsondata=eval(msg);
+
+                    $('#showListUl').children().remove();
                     for(i=0; i< jsondata.length ; i++){
                      	//alert(jsondata[i].name);
                         var oneLi = "<li id='"+ jsondata[i].id +"' " ;
@@ -20,6 +34,7 @@
                         $('#showListUl').append(oneLi);
                     }
                 }
+
 
 			$(function(){
 
@@ -32,7 +47,7 @@
    					type: "POST",
    					url: targetUrl,
  					data:"{'email':'%"+byEmail+"%'}", 
-   					success: showListFunc,
+   					success: showListFunc
 				    },"json");
 
             //prevent the browser to follow the link
@@ -139,28 +154,28 @@
 			<div id="tabs-1">
 				<table>
 					<tr><td align="right">Name:</td>
-					<td align="left"><input type="text" name="talentName" /></td></tr>
+					<td align="left"><input type="text" name="talent.name" /></td></tr>
 
 					<tr><td align="right">First name:</td>
-					<td align="left"><input type="text" name="talentFirstName" /></td></tr>
+					<td align="left"><input type="text" name="talent.firstname" /></td></tr>
 
 					<tr><td align="right">Last Name:</td>
-					<td align="left"><input type="text" name="talentLastName" /></td></tr>
+					<td align="left"><input type="text" name="talent.lastname" /></td></tr>
 
 					<tr><td align="right">Cell phone:</td>
-					<td align="left"><input type="text" name="talentCellPhone" /></td></tr>
+					<td align="left"><input type="text" name="talent.cellphone" /></td></tr>
 					<tr><td align="right">Email:</td>
-					<td align="left"><input type="text" name="talentEmail" /></td></tr>
+					<td align="left"><input type="text" name="talent.email" /></td></tr>
 					<tr><td align="right">Birth Year:</td>
-					<td align="left"><input type="text" name="talentBirthYear" width="5"/></td></tr>
+					<td align="left"><input type="text" name="talent.BirthYear" width="5"/></td></tr>
 					<tr><td align="right">Birth Day:</td>
-					<td align="left"><input type="text" name="talentBirthDay" /></td></tr>
+					<td align="left"><input type="text" name="talent.BirthDay" /></td></tr>
 					<tr><td align="right">Skill Set:</td>
-					<td align="left"><input type="text" name="talentSkillSet" width="200"/></td></tr>
+					<td align="left"><input type="text" name="talent.SkillSet" width="200"/></td></tr>
 					<tr><td align="right">Description:</td>
 					<td align="left"><textarea name="talentDesc" cols="50" rows="5"></textarea></td></tr>
 				</table>
-				<input type="button" name="insertInfo" value="insert basic information" />
+				<input type="button" name="insert.desc" value="insert basic information" />
 			</div>
 
 
