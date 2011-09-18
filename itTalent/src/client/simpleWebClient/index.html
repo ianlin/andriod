@@ -6,11 +6,18 @@
 		<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript">
+   		function getTalentById(id){
+			alert(id);
+			$('input[name|="talentName"]').val(id);
+		}
                 function showListFunc(msg){
                      var jsondata=eval(msg);
                     for(i=0; i< jsondata.length ; i++){
                      	//alert(jsondata[i].name);
-                        $('#showListUl').append("<li>"+jsondata[i].name+"</li>");
+                        var oneLi = "<li id='"+ jsondata[i].id +"' " ;
+                        oneLi = oneLi + "onClick='getTalentById("+jsondata[i].id+");' ";
+ 			oneLi = oneLi + " >" + jsondata[i].name +"</li>";
+                        $('#showListUl').append(oneLi);
                     }
                 }
 
