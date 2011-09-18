@@ -6,19 +6,27 @@
 		<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript">
+                function showListFunc(msg){
+                     var jsondata=eval(msg);
+                    for(i=0; i< jsondata.length ; i++){
+                     	//alert(jsondata[i].name);
+                        $('#showListUl').append("<li>"+jsondata[i].name+"</li>");
+                    }
+                }
+
 			$(function(){
 
 				$( "input:submit, button").button();
 				$('#searchSubmit').click(function() {
-			            var url = "/itTalent/api/talent.byEmail/select";
+			            var targetUrl = "/itTalent/api/talent.byEmail/select";
 				    var byEmail = $('input[name|="byEmail"]').val() ;
- 				    alert(byEmail);
-                                    $.ajax(
-                                         { data:"{'email':'%"+byEmail+"%'}", 
-                                           success: function(data){
-                                               alert(data);
-                                           }
-                                    });
+
+    				    $.ajax({
+   					type: "POST",
+   					url: targetUrl,
+ 					data:"{'email':'%"+byEmail+"%'}", 
+   					success: showListFunc,
+				    },"json");
 
             //prevent the browser to follow the link
             			return false;
@@ -109,6 +117,10 @@
 			<p>Search by email Done!</p>
 		</div>
 	
+   		<div id="showList" >
+ 			<ul id="showListUl">
+			</ul>
+		</div>
 		<!-- Tabs for One Talent Information  -->
 		<div id="tabs">
 			<ul>
