@@ -57,6 +57,11 @@ public class TalentManager{
     public int insertObject(Object obj)throws Exception{
         return addObject(obj);
     }
+    /** simple select Object by primarykey */
+    public Object selectObject(Object key, String className)throws Exception{
+        String mapperSelectName = className+"Mapper.selectByPrimaryKey";
+        return this.SQL_SESSION.selectOne(mapperSelectName,key);
+    }
 
     public void deleteByPrimaryKey(String objName, String primaryKey)
 	throws Exception{
@@ -100,7 +105,10 @@ public class TalentManager{
         t.setBirthYear("2011");
         t.setDesc("a default user of talent manager");
 
-        tm.addObject(t);
+//        tm.addObject(t);
+        t = (Talent)tm.selectObject("11", Talent.class.getName() );
+        println(t.getName() );
+
 /*
 	println("talent added...");
         List<Talent> listTalent = tm.selectTalentByEmail("%toBeDel%");
