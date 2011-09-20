@@ -15,13 +15,14 @@ Tao-Sheng (taosheng.chen@gmail.com)
 	a specific headhunter's application it might not be very popular.
 	Currently, itTalent is hosted in github, therefore, feel free to
 	download and use. We will not ask for pay the usage.
-
+	===============
 
 == Design ==
 
-* Leverage stable open source tool as much as possible to reduce reinventing the wheel.
-* mybatis and the generator tool for reduce the work on data access.
-* jquery and jquery-ui for simple web UI
+* Leverage stable open source tools as much as possible to reduce reinventing the wheel.
+	* mybatis and the generator tool for reduce the work on data access.
+	* gson to manage DAO object accessed via WebCliet
+	* jquery and jquery-ui for simple web UI
 
 == Simple Web site ==
 * http request for select/add/remove/modify database

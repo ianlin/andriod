@@ -32,16 +32,26 @@ public class TalentServlet extends HttpServlet{
 	throws IOException,Exception{
             String result ="";
             if(className.equals("talent.byEmail")){
+                result = result + "[";
                 Gson gson = new Gson();
 	        Map<String, String> toSelectMap = 
 		    gson.fromJson(requestContent, new TypeToken<Map<String, String>>() {}.getType() );
 	        TalentManager tManager = new TalentManager();
                 List<Talent> talentList = tManager.selectTalentByEmail(toSelectMap.get("email"));
-                result = "[";
                 for (Talent t : talentList){ 
                     result = result +  gson.toJson(t) +",";
                 } 
                 result = result + "]";
+            }else if(className.equals("talent.byPrimarykey")){
+                Gson gson = new Gson();
+	        Map<String, String> toSelectMap = 
+		    gson.fromJson(requestContent, new TypeToken<Map<String, String>>() {}.getType() );
+	        TalentManager tManager = new TalentManager();
+                Talent t = (Talent) tManager.selectObject(Talent.class.getName(),toSelectMap.get("primarykey"));
+                result = result +  gson.toJson(t) ;
+
+	    }else{
+                throw new Exception("have not support: "+ className+" yet!" );
             }
             return result;
     }
