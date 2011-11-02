@@ -33,6 +33,8 @@ Tao-Sheng (taosheng.chen@gmail.com)
 		curl -X POST http://localhost:8080/itTalent/api/talent.byEmail/select --data "{'email':'gmail.com'}"
 	- remove talent 
 		curl -X POST http://localhost:8080/itTalent/api/Talent/delete --data "{'primarykey':'15'}"
+	- update talent
+		curl -X POST http://localhost:8080/itTalent/api/Talent/update --data "{'name':'rz','email':'somebody2@gmail.com','cellPhone':'23939889','birthYear':'2011','selfSkillDesc':'too many to mentain','desc':'simple description of my self','birthData':'1988-04-21','firstName':'Rad','lastName':'Zebra'}"
 == Merge database ==
 
 

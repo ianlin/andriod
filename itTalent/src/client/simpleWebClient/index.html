@@ -9,7 +9,14 @@
                 function showTalentFunc(msg){
                   // alert(msg)
                    var jsondata=eval("["+msg+"]");
-   		   $('input[name|="talent.name"]').val(jsondata[0]['name']);
+                   for(var key in jsondata[0]) {
+                	if (jsondata[0].hasOwnProperty(key)){
+    			// value = obj[key];
+   		        $('input[name|="talent.'+key+'"]').val(jsondata[0][key]);
+   		        $('textarea[name|="talent.'+key+'"]').val(jsondata[0][key]);
+  			}
+		   }
+   		   //$('input[name|="talent.name"]').val(jsondata[0]['name']);
 
    		}
    		function getTalentById(id){
@@ -157,23 +164,23 @@
 					<td align="left"><input type="text" name="talent.name" /></td></tr>
 
 					<tr><td align="right">First name:</td>
-					<td align="left"><input type="text" name="talent.firstname" /></td></tr>
+					<td align="left"><input type="text" name="talent.firstName" /></td></tr>
 
 					<tr><td align="right">Last Name:</td>
-					<td align="left"><input type="text" name="talent.lastname" /></td></tr>
+					<td align="left"><input type="text" name="talent.lastName" /></td></tr>
 
 					<tr><td align="right">Cell phone:</td>
-					<td align="left"><input type="text" name="talent.cellphone" /></td></tr>
+					<td align="left"><input type="text" name="talent.cellPhone" /></td></tr>
 					<tr><td align="right">Email:</td>
 					<td align="left"><input type="text" name="talent.email" /></td></tr>
 					<tr><td align="right">Birth Year:</td>
-					<td align="left"><input type="text" name="talent.BirthYear" width="5"/></td></tr>
+					<td align="left"><input type="text" name="talent.birthYear" width="5"/></td></tr>
 					<tr><td align="right">Birth Day:</td>
-					<td align="left"><input type="text" name="talent.BirthDay" /></td></tr>
+					<td align="left"><input type="text" name="talent.birthDay" /></td></tr>
 					<tr><td align="right">Skill Set:</td>
-					<td align="left"><input type="text" name="talent.SkillSet" width="200"/></td></tr>
+					<td align="left"><input type="text" name="talent.selfSkillDesc" width="200"/></td></tr>
 					<tr><td align="right">Description:</td>
-					<td align="left"><textarea name="talentDesc" cols="50" rows="5"></textarea></td></tr>
+					<td align="left"><textarea name="talent.desc" cols="50" rows="5"></textarea></td></tr>
 				</table>
 				<input type="button" name="insert.desc" value="insert basic information" />
 			</div>
