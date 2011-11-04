@@ -63,13 +63,19 @@ public class TalentManager{
         return this.SQL_SESSION.selectOne(mapperSelectName,key);
     }
 
+    public void updateObject(Object obj)
+	throws Exception{
+        String mapperUpdateName = obj.getClass().getName()+"Mapper.updateByPrimaryKeySelective";
+//        String mapperUpdateName = "net.radzebra.itTalent.dao."+objName+"Mapper.deleteByPrimaryKey";
+        this.SQL_SESSION.update(mapperUpdateName,obj);
+    }
+
     public void deleteByPrimaryKey(String objName, String primaryKey)
 	throws Exception{
         String mapperDeleteName = "net.radzebra.itTalent.dao."+objName+"Mapper.deleteByPrimaryKey";
         this.SQL_SESSION.delete(mapperDeleteName,primaryKey);
-        
-
     }
+
     public void deleteTalentById(String id){
         TalentMapper talentMapper = this.SQL_SESSION.getMapper(TalentMapper.class);
         talentMapper.deleteByPrimaryKey(id);
@@ -108,6 +114,9 @@ public class TalentManager{
 //        tm.addObject(t);
         t = (Talent)tm.selectObject( Talent.class.getName() ,"11");
         println(t.getName() );
+        t.setBirthDate("2011-11-11");
+        t.setName("updated!");
+        tm.updateObject(t) ;
 
 /*
 	println("talent added...");

@@ -9,7 +9,7 @@
   <property name="ittalentrz" location="/tmp/ittalentrz"/>
   <property name="gwtsdk" location="/tmp/google_appengine"/>
   <property name="dist" location="dist"/>
-  <property name="tomcat" location="/usr/share/tomcat6/"/>
+  <property name="tomcat" location="/home/doug/apache-tomcat-6.0.33"/>
   <property name="thirdParty"  location="thirdParty"/>
 
   <path id="compile.classpath">

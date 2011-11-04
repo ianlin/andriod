@@ -20,6 +20,15 @@ public class TalentServlet extends HttpServlet{
 	    TalentManager tManager = new TalentManager();
             tManager.addObject(obj);
     }
+    private void updateObject(String className, BufferedReader requestContent)
+	throws IOException,Exception{
+            Gson gson = new Gson();
+            Map<String, Class> classMap = new HashMap<String, Class>(7); 
+            classMap.put("Talent",Talent.class);
+	    Object obj = gson.fromJson(requestContent, classMap.get("Talent"));
+	    TalentManager tManager = new TalentManager();
+            tManager.updateObject(obj);
+    }
     private void deleteObject(String className, BufferedReader requestContent)
 	throws IOException,Exception{
             Gson gson = new Gson();
@@ -59,6 +68,7 @@ public class TalentServlet extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse res)
         throws ServletException,IOException{
 	res.setContentType("text/plain; charset=UTF-8");
+        res.setCharacterEncoding("UTF-8");
         PrintWriter output = res.getWriter();
         StringBuffer outputBuffer = new StringBuffer();
 //	ServletContext context = req.getContext();
@@ -79,6 +89,8 @@ public class TalentServlet extends HttpServlet{
                 addObject(targetClass,reader);
             }else if(targetAction.equals("delete")){
                 deleteObject(targetClass,reader) ;
+            }else if(targetAction.equals("update")){
+                updateObject(targetClass,reader) ;
             }else if(targetAction.equals("select")){
                 String result = selectObject(targetClass,reader) ;
                 outputBuffer.append(result) ;

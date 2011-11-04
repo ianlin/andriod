@@ -6,8 +6,11 @@
 		<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript">
+                function showSuccessUpdate(msg){
+                    alert(msg);
+                }
                 function showTalentFunc(msg){
-                  // alert(msg)
+                   alert(msg)
                    var jsondata=eval("["+msg+"]");
                    for(var key in jsondata[0]) {
                 	if (jsondata[0].hasOwnProperty(key)){
@@ -46,6 +49,25 @@
 			$(function(){
 
 				$( "input:submit, button").button();
+                                $('#updateTalent').click(function() {
+			            var targetUrl = "/itTalent/api/Talent/update";
+                                    var data = "{" ;
+                                    
+                                    $('input[name^="talent."], textarea[name^="talent."]').each(function() {
+                                         var keyname = $(this).attr('name') ;
+                                         keyname = keyname.replace('talent.','');
+                                         data = data + "'"+keyname +"':'"+ $(this).val()+"',";
+                                    }); 
+                                    data = data +"'reserved':''}";
+                                    alert(data);
+    				    $.ajax({
+   					type: "POST",
+   					url: targetUrl,
+ 					data: data,
+   					success: showSuccessUpdate
+				    },"json");
+                                return false;
+				});
 				$('#searchSubmit').click(function() {
 			            var targetUrl = "/itTalent/api/talent.byEmail/select";
 				    var byEmail = $('input[name|="byEmail"]').val() ;
@@ -161,7 +183,7 @@
 			<div id="tabs-1">
 				<table>
 					<tr><td align="right">Name:</td>
-					<td align="left"><input type="text" name="talent.name" /></td></tr>
+					<td align="left"><input type="hidden" name="talent.id" /><input type="text" name="talent.name" /></td></tr>
 
 					<tr><td align="right">First name:</td>
 					<td align="left"><input type="text" name="talent.firstName" /></td></tr>
@@ -176,13 +198,14 @@
 					<tr><td align="right">Birth Year:</td>
 					<td align="left"><input type="text" name="talent.birthYear" width="5"/></td></tr>
 					<tr><td align="right">Birth Day:</td>
-					<td align="left"><input type="text" name="talent.birthDay" /></td></tr>
+					<td align="left"><input type="text" name="talent.birthDate" /></td></tr>
 					<tr><td align="right">Skill Set:</td>
 					<td align="left"><input type="text" name="talent.selfSkillDesc" width="200"/></td></tr>
 					<tr><td align="right">Description:</td>
 					<td align="left"><textarea name="talent.desc" cols="50" rows="5"></textarea></td></tr>
 				</table>
-				<input type="button" name="insert.desc" value="insert basic information" />
+				<input type="button" id="updateTalent" 
+					value="update basic information" />
 			</div>
 
 
